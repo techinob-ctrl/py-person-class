@@ -12,10 +12,11 @@ def create_person_list(people: list) -> list:
     persons = [Person(data["name"], data["age"]) for data in people]
 
     for data in people:
-        spouse_key = "wife" if "wife" in data else "husband" if "husband" in data else None
+        spouse_name = data.get("wife")
+        spouse_key = "wife" if spouse_name is not None else None
         if spouse_key is None:
-            continue
-        spouse_name = data.get(spouse_key)
+            spouse_name = data.get("husband")
+            spouse_key = "husband" if spouse_name is not None else None
         if spouse_name is None:
             continue
         person = Person.people[data["name"]]
