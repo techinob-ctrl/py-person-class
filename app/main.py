@@ -9,17 +9,14 @@ class Person:
 
 def create_person_list(people: list) -> list:
     Person.people = {}
-    persons = [Person(data["name"], data["age"]) for data in people]
+    persons = [Person(data.get("name"), data.get("age")) for data in people]
 
     for data in people:
-        spouse_name = data.get("wife")
-        spouse_key = "wife" if spouse_name is not None else None
-        if spouse_key is None:
-            spouse_name = data.get("husband")
-            spouse_key = "husband" if spouse_name is not None else None
+        spouse_name = data.get("wife") or data.get("husband")
         if spouse_name is None:
             continue
-        person = Person.people[data["name"]]
+        spouse_key = "wife" if data.get("wife") else "husband"
+        person = Person.people[data.get("name")]
         spouse = Person.people[spouse_name]
         setattr(person, spouse_key, spouse)
 
