@@ -8,24 +8,24 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    # ✅ RESET class attribute ก่อน (สำคัญมาก)
+    # reset class attribute ก่อนทุกครั้ง
     Person.people = {}
 
     # สร้างออบเจ็กต์ทั้งหมดก่อน
-    persons = [Person(p["name"], p["age"]) for p in people]
+    persons = [Person(person_data["name"], person_data["age"]) for person_data in people]
 
     # เชื่อมคู่สมรส
-    for p in people:
-        person = Person.people[p["name"]]
+    for person_data in people:
+        person = Person.people[person_data["name"]]
 
-        if "wife" in p:
+        if "wife" in person_data:
             spouse_key = "wife"
-        elif "husband" in p:
+        elif "husband" in person_data:
             spouse_key = "husband"
         else:
             continue
 
-        spouse_name = p.get(spouse_key)
+        spouse_name = person_data.get(spouse_key)
         if spouse_name is None:
             continue
 
