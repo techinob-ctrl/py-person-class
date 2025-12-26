@@ -12,7 +12,10 @@ def create_person_list(people: list) -> list:
     Person.people = {}
 
     # สร้างออบเจ็กต์ทั้งหมดก่อน
-    persons = [Person(person_data["name"], person_data["age"]) for person_data in people]
+    persons = [
+        Person(person_data["name"], person_data["age"]) 
+        for person_data in people
+    ]
 
     # เชื่อมคู่สมรส
     for person_data in people:
